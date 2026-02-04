@@ -15,16 +15,17 @@ A lightweight React application that allows users to submit prompts to an AI API
 - Clear chat functionality
 
 ## Design Decisions
-This project was intentionally kept lightweight to mirror real-world frontend workflows.
-I focused on:
 
-- Clear separation of concerns (UI components vs API logic)
-- Explicit loading and error states for better UX
-- Stateless components where possible
-- Persisting chat history via localStorage to improve usability
+This project was designed to simulate a real-world frontend feature rather than a demo.
+
+Key considerations:
+- Clear separation between UI components and API logic
+- Explicit loading and error states for predictable UX
+- Provider-agnostic AI integration using Hugging Face
+- Local storage persistence to improve usability
 - Environment-based configuration for secure API key handling
 
-The goal was to demonstrate clean, maintainable frontend architecture rather than over-engineering.
+The goal was to keep the implementation simple, readable, and easy to extend without over-engineering.
 
 ## AI Integration
 

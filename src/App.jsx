@@ -18,6 +18,8 @@ export default function App() {
   }, [messages]);
 
   const handleSubmit = async () => {
+    if (!prompt.trim()) return;
+
     try {
       setLoading(true);
       setError("");
@@ -29,8 +31,8 @@ export default function App() {
       setMessages((prev) => [...prev, { role: "assistant", content: aiReply }]);
 
       setPrompt("");
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (err) {
+      setError(err?.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -57,7 +59,7 @@ export default function App() {
       <ChatHistory messages={messages} />
 
       {messages.length > 0 && (
-        <button className="clear-btn" onClick={clearChat}>
+        <button className="clear-btn" onClick={clearChat} disabled={loading}>
           Clear Chat
         </button>
       )}

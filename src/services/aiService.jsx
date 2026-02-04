@@ -10,19 +10,18 @@ export async function fetchAIResponse(prompt) {
     },
     body: JSON.stringify({
       inputs: prompt,
+      options: { wait_for_model: true },
     }),
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch AI response");
-  }
+  if (!res.ok) throw new Error("Failed to fetch AI response");
 
   const data = await res.json();
 
-  // HF returns array responses
   if (Array.isArray(data) && data[0]?.generated_text) {
-    return data[0].generated_text;
+    return data[0].generated_text.replace(prompt, "").trim();
   }
+  if (data?.error) throw new Error(data.error);
 
   return "No response generated.";
 }
